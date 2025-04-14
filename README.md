@@ -14,10 +14,6 @@ Opção 01
 VS CODE;
 4. Ao abrir o Editor selecionar a opção Open Folder e abrir a pasta com o Repositório no Ambiente de desenvolvimento.
 
-Opção 02
-1. Por meio do terminal do VS code realizar o download do Repositório :
-git clone git@github.com:
-
 # Configuração do Ambiente do editor de Código
 No terminal do VS CODE Será necessário criar uma máquina virtual e instalar as dependências (Biliotecas Python)
 
@@ -38,17 +34,17 @@ source ./venv/bin/activate
  pip install -r requirements.txt
 ```
 # Configuração para acessar o Servidor e ativar o Banco de dados Padrão do DJANGO(SQlite)
-1. Ativando o banco de dados :
+1. Ativando o banco de dados : *SOMENTE PARA PROJETO SQLITE
 ```
 python manage.py makemigrations
 python manage.py migrate
 ```
-3. Criando o usuário Admin :
+3. Criando o usuário Admin : *SOMENTE PARA PROJETO SQLITE
 ```
 python manage.py createsuperuser 
 ```
-5. Inserir nome , email e senha (Criar uma nova)
-6. Iniciando o Servidor :
+5. Inserir nome , email e senha (Criar uma nova) *SOMENTE PARA PROJETO SQLITE
+6. Iniciando o Servidor : 
 ```
 python manage.py runserver
 ```
