@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portal do Usuário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+    <h2 class="mb-4">Portal do Usuário</h2>
+
+    <div class="card p-3 mb-4">
+        <h5>Cadastro</h5>
+        <input id="nome-usuario" class="form-control mb-2" placeholder="Nome">
+        <input id="cpf" class="form-control mb-2" placeholder="CPF">
+        <button class="btn btn-success" onclick="cadastrarUsuario()">Cadastrar Usuário</button>
+    </div>
+
+    <div class="card p-3 mb-4">
+        <h5>Agendar Consulta</h5>
+        <select id="lista-medicos" class="form-select mb-2"></select>
+        <button class="btn btn-primary" onclick="agendarConsulta()">Agendar</button>
+    </div>
+
+    <div class="card p-3 mb-4">
+        <h5>Cancelar Consulta</h5>
+        <input id="cpf-excluir" class="form-control mb-2" placeholder="CPF">
+        <select id="medico-excluir" class="form-select mb-2"></select>
+        <button class="btn btn-danger" onclick="excluirConsulta()">Cancelar</button>
+    </div>
+
+    <div id="mensagem" class="mt-2 text-success"></div>
+
+    <script>
+        async function carregarMedicos() {
+            const resp = await fetch('/api/medicos/');
+            const medicos = await resp.json();
+            const select = document.getElementById('lista-medicos');
+            const excluirSelect = document.getElementById('medico-excluir');
+            select.innerHTML = '';
+            excluirSelect.innerHTML = '';
+            medicos.forEach(m => {
+                const option = `<option value="${m.nome}">${m.nome} - ${m.especialidade}</option>`;
+                select.innerHTML += option;
+                excluirSelect.innerHTML += option;
+            });
+        }
+
+        async function cadastrarUsuario() {
+            const data = {
+                nome: document.getElementById('nome-usuario').value,
+                cpf: document.getElementById('cpf').value
+            };
+            await fetch('/api/cadastrar-usuario/', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            document.getElementById('mensagem').innerText = "Usuário cadastrado com sucesso!";
+        }
+
+        async function agendarConsulta() {
+            const data = {
+                cpf: document.getElementById('cpf').value,
+                medico: document.getElementById('lista-medicos').value
+            };
+            await fetch('/api/agendar-consulta/', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            document.getElementById('mensagem').innerText = "Consulta agendada!";
+        }
+
+        async function excluirConsulta() {
+            const data = {
+                cpf: document.getElementById('cpf-excluir').value,
+                medico: document.getElementById('medico-excluir').value
+            };
+            await fetch('/api/excluir-consulta/', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            document.getElementById('mensagem').innerText = "Consulta cancelada!";
+        }
+
+        carregarMedicos();
+    </script>
+</body>
+</html>

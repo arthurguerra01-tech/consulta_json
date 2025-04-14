@@ -1,0 +1,32 @@
+{
+    "medicos": [
+        {},
+        {
+            "nome": "JUAN SILVA",
+            "especialidade": "MEDICINA ESPORTIVA",
+            "data": "2025/04/16"
+        },
+        {
+            "nome": "ANA MARIA ",
+            "especialidade": "NUTRICIONISTA",
+            "data": "2025/04/18"
+        }
+    ],
+    "usuarios": [
+        {},
+        {
+            "nome": "MARIA DO CARMO",
+            "cpf": "159456753"
+        },
+        {
+            "nome": "JOAN SILVA",
+            "cpf": "789456123"
+        }
+    ],
+    "consultas": [
+        {
+            "cpf": "",
+            "medico": "ANA MARIA "
+        }
+    ]
+}
